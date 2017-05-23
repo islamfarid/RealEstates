@@ -1,9 +1,7 @@
 package com.example.islam.realestate.data.models;
 
-import javax.annotation.Generated;
 import com.google.gson.annotations.SerializedName;
 
-@Generated("com.robohorse.robopojogenerator")
 public class ImagesItem{
 
 	@SerializedName("id")

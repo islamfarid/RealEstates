@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cardview_corner_radius">10dp</dimen>
+    <dimen name="cardview_elevation">5dp</dimen>
+    <dimen name="real_estate_image_height">400dp</dimen>
+    <dimen name="real_estate_list_vertical_margin">16dp</dimen>
+    <dimen name="real_estate_list_horizontal_margin">16dp</dimen>
+    <dimen name="circle_indicator_height">30dp</dimen>
+    <dimen name="real_estate_large_text_size">16sp</dimen>
+</resources>
