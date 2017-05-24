@@ -70,6 +70,8 @@ public class RealEstatesListAdapter extends RecyclerView.Adapter {
                 ((RealEstateViewHolder) viewHolder).indicator.setViewPager(((RealEstateViewHolder) viewHolder).realeEstateImagesViewPager);
                 ((RealEstateViewHolder) viewHolder).realeEstateTitleTextView.setText(mDisplayedItems.get(position).getTitle());
                 ((RealEstateViewHolder) viewHolder).realeEstatePriceTextView.setText(String.valueOf(mActivity.getString(R.string.real_estate_price, mDisplayedItems.get(position).getPrice())));
+                ((RealEstateViewHolder) viewHolder).realeEstateAddressTextView.setText(mDisplayedItems.get(position).getLocation().getAddress());
+
             }
         } else if (viewHolder instanceof AdvertiseViewHolder) {
             ((AdvertiseViewHolder) viewHolder).advertiseNumberTextView.setText(String.valueOf(position + 1));
@@ -88,6 +90,8 @@ public class RealEstatesListAdapter extends RecyclerView.Adapter {
         TextView realeEstateTitleTextView;
         @BindView(R.id.textview_price)
         TextView realeEstatePriceTextView;
+        @BindView(R.id.textview_address)
+        TextView realeEstateAddressTextView;
         @BindView(R.id.indicator)
         CircleIndicator indicator;
 

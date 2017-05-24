@@ -14,6 +14,10 @@ import io.reactivex.Observable;
  * Created by islam on 23/05/17.
  */
 
+/**
+ * the business in this class is very basic but it is important to do it in a class because may be
+ * the same functionality needed in a different screen so we can reuse it
+ */
 public class RealEstateListBusiness {
     RealEstatesRepository mRealEstatesRepository;
 

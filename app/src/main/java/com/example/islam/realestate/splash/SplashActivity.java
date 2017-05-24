@@ -13,6 +13,9 @@ import com.example.islam.realestate.realestaeslist.view.RealEstatesListActivity;
  * Created by islam on 24/05/17.
  */
 
+/**
+ * actually splash screen has no business so i didn't implement neither  business class nor presenter class
+ */
 public class SplashActivity extends BaseActivity {
     private final int SPLASH_DISPLAY_LENGTH = 1000;
 

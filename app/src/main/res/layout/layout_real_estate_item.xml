@@ -27,24 +27,47 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/real_estate_list_vertical_margin">
+            android:layout_marginEnd="@dimen/real_estate_list_horizontal_margin"
+            android:layout_marginStart="@dimen/real_estate_list_horizontal_margin"
             android:layout_marginTop="@dimen/real_estate_list_vertical_margin">
 
             <TextView
-                android:maxEms="15"
-                android:singleLine="true"
-                android:ellipsize="end"
                 android:id="@+id/textview_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/real_estate_list_horizontal_margin" />
+                android:ellipsize="end"
+                android:maxEms="15"
+                android:singleLine="true" />
 
             <TextView
                 android:id="@+id/textview_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/real_estate_list_vertical_margin"
+            android:layout_marginEnd="@dimen/real_estate_list_horizontal_margin"
+            android:layout_marginStart="@dimen/real_estate_list_horizontal_margin"
+            >
+
+            <TextView
+                android:id="@+id/textview_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxEms="15"
+                android:singleLine="true" />
+
+            <ImageView
+                android:layout_width="@dimen/real_estate_pin_width"
+                android:layout_height="@dimen/real_estate_pin_height"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/real_estate_list_horizontal_margin" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/pin" />
         </RelativeLayout>
     </LinearLayout>
 

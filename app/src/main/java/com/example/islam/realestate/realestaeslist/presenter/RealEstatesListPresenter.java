@@ -47,6 +47,9 @@ public class RealEstatesListPresenter implements RealEstatesListContract.Present
                 mainThread()).subscribeOn(Schedulers.io()).subscribe((realEstatesItems) -> {
             mView.hideLoading();
             mView.showAllRealEstates(realEstatesItems);
+        }, throwable -> {
+            mView.hideLoading();
+            mView.showErrorMessage(throwable.getMessage());
         }));
     }
 }

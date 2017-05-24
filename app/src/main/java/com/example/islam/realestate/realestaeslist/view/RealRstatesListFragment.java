@@ -1,6 +1,7 @@
 package com.example.islam.realestate.realestaeslist.view;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -67,7 +68,7 @@ public class RealRstatesListFragment extends BaseFragment implements RealEstates
 
     @Override
     public void showErrorMessage(String errorMsg) {
-
+        Snackbar.make(mRealEstatesList, errorMsg, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
