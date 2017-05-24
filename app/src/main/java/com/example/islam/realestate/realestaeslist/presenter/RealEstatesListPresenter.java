@@ -29,6 +29,7 @@ public class RealEstatesListPresenter implements RealEstatesListContract.Present
     public void setmRealEstateListBusiness(RealEstateListBusiness mRealEstateListBusiness) {
         this.mRealEstateListBusiness = mRealEstateListBusiness;
     }
+
     @Inject
     public void setupListeners() {
         mView.setPresenter(this);
@@ -36,11 +37,12 @@ public class RealEstatesListPresenter implements RealEstatesListContract.Present
 
     @Override
     public void unSubscribe() {
-
+        mSubscriptions.clear();
     }
 
     @Override
     public void getAllRealEstates() {
+        mView.showLoading();
         mSubscriptions.add(mRealEstateListBusiness.getAllRealEstates().observeOn(AndroidSchedulers.
                 mainThread()).subscribeOn(Schedulers.io()).subscribe((realEstatesItems) -> {
             mView.hideLoading();

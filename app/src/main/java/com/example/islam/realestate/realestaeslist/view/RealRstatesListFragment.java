@@ -78,4 +78,10 @@ public class RealRstatesListFragment extends BaseFragment implements RealEstates
     public static RealRstatesListFragment newInstance() {
         return new RealRstatesListFragment();
     }
+
+    @Override
+    public void onStop() {
+        mPresenter.unSubscribe();
+        super.onStop();
+    }
 }
