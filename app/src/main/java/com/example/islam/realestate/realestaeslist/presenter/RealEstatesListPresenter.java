@@ -2,6 +2,7 @@ package com.example.islam.realestate.realestaeslist.presenter;
 
 import com.example.islam.realestate.realestaeslist.RealEstatesListContract;
 import com.example.islam.realestate.realestaeslist.business.RealEstateListBusiness;
+import com.example.islam.realestate.utils.EspressoIdlingResource;
 
 import javax.inject.Inject;
 
@@ -43,8 +44,13 @@ public class RealEstatesListPresenter implements RealEstatesListContract.Present
     @Override
     public void getAllRealEstates() {
         mView.showLoading();
+        EspressoIdlingResource.increment();
         mSubscriptions.add(mRealEstateListBusiness.getAllRealEstates().observeOn(AndroidSchedulers.
-                mainThread()).subscribeOn(Schedulers.io()).subscribe((realEstatesItems) -> {
+                mainThread()).subscribeOn(Schedulers.io()).doOnTerminate(() -> {
+            if (!EspressoIdlingResource.getIdlingResource().isIdleNow()) {
+                EspressoIdlingResource.decrement(); // Set app as idle.
+            }
+        }).subscribe((realEstatesItems) -> {
             mView.hideLoading();
             mView.showAllRealEstates(realEstatesItems);
         }, throwable -> {

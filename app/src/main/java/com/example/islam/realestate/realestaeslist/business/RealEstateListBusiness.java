@@ -17,6 +17,8 @@ import io.reactivex.Observable;
 /**
  * the business in this class is very basic but it is important to do it in a class because may be
  * the same functionality needed in a different screen so we can reuse it
+ * this class has no unit test methods because it has no business but in normal situations every
+ * screen has yts own business and of course its own unit test class
  */
 public class RealEstateListBusiness {
     RealEstatesRepository mRealEstatesRepository;

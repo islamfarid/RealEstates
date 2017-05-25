@@ -13,8 +13,10 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.android.plugins.RxAndroidPlugins;
-import io.reactivex.schedulers.Schedulers;
+import io.reactivex.internal.schedulers.ExecutorScheduler;
+import io.reactivex.plugins.RxJavaPlugins;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -24,7 +26,7 @@ import static org.mockito.Mockito.when;
  * Created by islam on 24/05/17.
  */
 public class RealEstatesListPresenterTest {
-    RealEstatesListPresenter mRealEstatesListPresenter;
+    private RealEstatesListPresenter mRealEstatesListPresenter;
     @Mock
     private RealEstateListBusiness mRealEstateListBusiness;
     @Mock
@@ -32,8 +34,17 @@ public class RealEstatesListPresenterTest {
 
     @BeforeClass
     public static void setUpClass() {
-        RxAndroidPlugins.setInitMainThreadSchedulerHandler(__ -> Schedulers.trampoline());
-    }
+        Scheduler immediate = new Scheduler() {
+            @Override
+            public Worker createWorker() {
+                return new ExecutorScheduler.ExecutorWorker(Runnable::run);
+            }
+        };
+        RxJavaPlugins.setInitIoSchedulerHandler(scheduler -> immediate);
+        RxJavaPlugins.setInitComputationSchedulerHandler(scheduler -> immediate);
+        RxJavaPlugins.setInitNewThreadSchedulerHandler(scheduler -> immediate);
+        RxJavaPlugins.setInitSingleSchedulerHandler(scheduler -> immediate);
+        RxAndroidPlugins.setInitMainThreadSchedulerHandler(scheduler -> immediate);    }
 
     @Before
     public void setupTasksPresenter() {
@@ -43,7 +54,7 @@ public class RealEstatesListPresenterTest {
     }
 
     @Test
-    public void testWhenGetAllRealEstates_ProgressISDisplayed() {
+    public void testWhenGetAllRealEstates_ShowLoadingISCalled() {
         when(mRealEstateListBusiness.getAllRealEstates()).thenReturn(Observable.create(sub -> {
             sub.onNext(new ArrayList<>());
             sub.onComplete();
@@ -53,7 +64,7 @@ public class RealEstatesListPresenterTest {
     }
 
     @Test
-    public void testWhenGetAllRealEstatesSuccess_ProgressISHidden() {
+    public void testWhenGetAllRealEstatesSuccess_HideLoadingISCalled() {
         when(mRealEstateListBusiness.getAllRealEstates()).thenReturn(Observable.create(sub -> {
             sub.onNext(new ArrayList<>());
             sub.onComplete();
@@ -63,7 +74,7 @@ public class RealEstatesListPresenterTest {
     }
 
     @Test
-    public void testWhenGetAllRealEstatesError_ProgressISHidden() {
+    public void testWhenGetAllRealEstatesError_HideLoadingISCalled() {
         when(mRealEstateListBusiness.getAllRealEstates()).thenReturn(Observable.create(sub -> {
             sub.onError(new Throwable());
         }));
@@ -71,8 +82,17 @@ public class RealEstatesListPresenterTest {
         verify(mRealEstatesView, times(1)).hideLoading();
     }
 
+    @Test
+    public void testWhenGetAllRealEstatesError_ShowErrorIsCalled() {
+        when(mRealEstateListBusiness.getAllRealEstates()).thenReturn(Observable.create(sub -> {
+            sub.onError(new Throwable(""));
+        }));
+        mRealEstatesListPresenter.getAllRealEstates();
+        verify(mRealEstatesView, times(1)).showErrorMessage("");
+    }
+
     @AfterClass
     public static void tearDownClass() {
-        RxAndroidPlugins.reset();
-    }
+        RxJavaPlugins.reset();
+        RxAndroidPlugins.reset();    }
 }

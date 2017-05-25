@@ -14,7 +14,6 @@ import com.example.islam.realestate.R;
 import com.example.islam.realestate.data.models.ItemsItem;
 import com.example.islam.realestate.realestaeslist.RealEstatesListContract;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

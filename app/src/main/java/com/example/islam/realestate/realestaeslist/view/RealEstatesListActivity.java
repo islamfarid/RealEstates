@@ -33,4 +33,5 @@ public class RealEstatesListActivity extends BaseActivity {
                 realEstatesRepositoryComponent(((RealEstatesApplication) getApplication()).
                         getRealEstatesRepositoryComponent()).realEstatesListModule(new RealEstatesListModule(realRstatesListFragment)).build().inject(this);
     }
+
 }
